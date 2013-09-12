@@ -8,7 +8,7 @@ class Gutentag::TagName
   end
 
   def to_s
-    name.downcase
+    name.downcase.strip
   end
 
   private

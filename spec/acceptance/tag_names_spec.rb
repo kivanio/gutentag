@@ -88,6 +88,19 @@ describe "Managing tags via names" do
     article.tags.collect(&:name).should == ['portland']
   end
 
+  it "matches tag names ignoring whitespace" do
+    article.tag_names  = ['portland']
+    article.tag_names += [' portland ']
+    article.save!
+
+    article.tags.collect(&:name).should == ['portland']
+
+    article.tag_names << 'portland '
+    article.save!
+
+    article.tags.collect(&:name).should == ['portland']
+  end
+
   it "allows setting of tag names on unpersisted objects" do
     article = Article.new :tag_names => ['melbourne', 'pancakes']
     article.save!
