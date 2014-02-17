@@ -7,6 +7,14 @@ module Gutentag
   def self.configure
     yield self
   end
+  
+  def self.normaliser
+    @normaliser ||= Gutentag::TagName
+  end
+
+  def self.normaliser=(normaliser)
+    @normaliser = normaliser
+  end
 end
 
 require 'gutentag/active_record'
