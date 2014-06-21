@@ -14,6 +14,14 @@ module Gutentag::ActiveRecord
     end
   end
 
+  def delimited_tag_names
+    tag_names.sort.join(Gutentag.tag_name_delimiter)
+  end
+
+  def delimited_tag_names=(names)
+    self.tag_names = names.to_s.split(Gutentag.tag_name_delimiter)
+  end
+
   def reset_tag_names
     @tag_names = nil
   end
@@ -31,6 +39,7 @@ module Gutentag::ActiveRecord
   end
 
   private
+
   def _denormalised(names)
     names.split(",").flatten rescue names
   end
